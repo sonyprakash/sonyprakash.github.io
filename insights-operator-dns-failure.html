@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Troubleshooting OpenShift Insights Operator DNS Resolution Failure</title>
+
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 900px;
+    margin: auto;
+    padding: 30px;
+    line-height: 1.7;
+    color: #333;
+}
+
+h1 {
+    color: #cc0000;
+    border-bottom: 3px solid #cc0000;
+    padding-bottom: 10px;
+}
+
+h2 {
+    color: #cc0000;
+    margin-top: 30px;
+}
+
+code {
+    background: #f5f5f5;
+    padding: 2px 4px;
+}
+
+pre {
+    background: #f5f5f5;
+    padding: 15px;
+    border-left: 4px solid #cc0000;
+    overflow-x: auto;
+}
+
+.summary {
+    background: #eef6ff;
+    padding: 15px;
+    border-left: 5px solid #0066cc;
+    margin-bottom: 20px;
+}
+
+.footer {
+    margin-top: 50px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Troubleshooting OpenShift Insights Operator: "lookup console.redhat.com ... server misbehaving"</h1>
+
+<div class="summary">
+<strong>Executive Summary</strong><br>
+An OpenShift Insights Operator remained degraded because DNS resolution
+for <code>console.redhat.com</code> was failing from the node hosting the
+Insights pod. Rescheduling the pod to another control plane node resolved
+the issue.
+</div>
+
+<h2>Environment</h2>
+
+<ul>
+<li>OpenShift 4.14.38</li>
+<li>Insights Operator</li>
+</ul>
+
+<h2>Symptom</h2>
+
+<pre>
+Unable to report: unable to build request to connect to Insights server:
+
+Post "https://console.redhat.com/api/ingress/v1/upload":
+
+dial tcp: lookup console.redhat.com on 172.30.0.10:53:
+server misbehaving
+</pre>
+
+<h2>Investigation</h2>
+
+<p>
+The Insights Operator had been degraded for 38 days.
+The Insights pod was running on <strong>master-0</strong>.
+DNS resolution was tested from inside the pod.
+</p>
+
+<pre>
+oc get co insights
+
+oc get pod -n openshift-insights -o wide
+
+oc debug node/master-0
+
+dig @172.30.0.10 console.redhat.com
+</pre>
+
+<p>
+Result:
+</p>
+
+<pre>
+status: REFUSED
+</pre>
+
+<p>
+Other control plane nodes were able to resolve the same domain
+successfully, indicating that the issue was isolated to the node
+hosting the Insights pod.
+</p>
+
+<h2>Root Cause</h2>
+
+<p>
+The node hosting the Insights pod was unable to perform DNS lookups
+through the cluster DNS service. As a result, the operator could not
+resolve <code>console.redhat.com</code> and failed to upload data
+to Red Hat Insights.
+</p>
+
+<h2>Resolution</h2>
+
+<p>
+The affected control plane node was cordoned and the Insights pod
+was restarted.
+</p>
+
+<pre>
+oc adm cordon master-0
+
+oc delete pod <pod-name> -n openshift-insights
+</pre>
+
+<p>
+The pod was rescheduled to another control plane node and recovered
+successfully.
+</p>
+
+<h2>Verification</h2>
+
+<pre>
+oc get co insights
+</pre>
+
+<p>
+Verify that the Insights Operator reports a healthy status
+and is no longer degraded.
+</p>
+
+<h2>Key Takeaways</h2>
+
+<ul>
+<li>Compare behavior across multiple control plane nodes.</li>
+<li>Verify DNS resolution directly from the affected pod.</li>
+<li>Operator issues may originate from node-specific problems.</li>
+<li>Check DNS functionality before investigating the operator itself.</li>
+</ul>
+
+<h2>Keywords</h2>
+
+<ul>
+<li>OpenShift Insights Operator</li>
+<li>OpenShift DNS troubleshooting</li>
+<li>OpenShift cluster operator degraded</li>
+<li>CoreDNS troubleshooting</li>
+<li>OpenShift 4.14</li>
+<li>ARO troubleshooting</li>
+<li>console.redhat.com DNS failure</li>
+</ul>
+
+<div class="footer">
+<strong>Author:</strong> Soni Prakash<br>
+OpenShift | ARO | Platform Engineering<br><br>
+
+Building OpenShift Upgrade Advisor and sharing real-world OpenShift
+troubleshooting experiences.
+</div>
+
+</body>
+</html>
