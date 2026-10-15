@@ -1,47 +1,213 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Soni Prakash</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 900px;
-            margin: auto;
-            padding: 20px;
-        }
-        h1 {
-            color: #cc0000;
-        }
-        a {
-            color: #0066cc;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Soni Prakash P | OpenShift Architect | Platform Engineering</title>
+
+<meta name="description"
+      content="Technical articles on OpenShift, Bare Metal OpenShift, ARO, Kubernetes, Platform Engineering, Architecture, Cluster Upgrades and Troubleshooting.">
+
+<meta name="keywords"
+      content="OpenShift, Bare Metal OpenShift, ARO, Azure Red Hat OpenShift, Kubernetes, OpenShift Architecture, Platform Engineering, OpenShift Upgrades, OpenShift Troubleshooting">
+
+<meta name="author" content="Soni Prakash">
+
+<style>
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 1100px;
+    margin: auto;
+    padding: 30px;
+    line-height: 1.8;
+    color: #333;
+}
+
+h1 {
+    color: #cc0000;
+    margin-bottom: 10px;
+}
+
+h2 {
+    color: #cc0000;
+    margin-top: 40px;
+}
+
+.tagline {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background-color: #fafafa;
+}
+
+.card:hover {
+    box-shadow: 0px 2px 10px rgba(0,0,0,0.10);
+}
+
+a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.footer {
+    margin-top: 50px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    color: #666;
+}
+
+ul li {
+    margin-bottom: 8px;
+}
+
+</style>
+
 </head>
 
 <body>
 
 <h1>Soni Prakash</h1>
 
+<div class="tagline">
+OpenShift Architect - Bare Metal and ARO | Kubernetes | Platform Engineering
+</div>
+
+<h2>About Me</h2>
+
 <p>
-OpenShift | ARO | Platform Engineering
+Hello! I'm Soni Prakash, a Technical Architect specializing in Red Hat
+OpenShift, Azure Red Hat OpenShift (ARO), Kubernetes, Platform Engineering,
+and enterprise cloud-native platforms.
 </p>
 
+<p>
+My experience spans architecture, deployment, operations, upgrades, and
+troubleshooting of OpenShift environments running across Bare Metal,
+virtualized infrastructure, and public cloud platforms.
+</p>
+
+<p>
+I regularly work on OpenShift cluster lifecycle management, upgrade planning,
+operator lifecycle management, infrastructure architecture, platform
+reliability, networking, DNS, observability, logging, security, and
+production incident investigations.
+</p>
+
+<p>
+Over the years, I have helped architect, deploy, operate, and troubleshoot
+enterprise OpenShift platforms supporting business-critical applications and
+large-scale containerized environments.
+</p>
+
+<p>
+Through this blog, I share real-world troubleshooting scenarios,
+Root Cause Analysis (RCA), architecture insights, upgrade experiences,
+best practices, and lessons learned from managing OpenShift in production.
+</p>
+
+<p>
+I am also building <strong>OpenShift Upgrade Advisor</strong>,
+a platform focused on identifying upgrade blockers, deprecated APIs,
+operator risks, and cluster readiness issues before OpenShift upgrades.
+</p>
+
+<h2>Areas of Expertise</h2>
+
+<ul>
+    <li>Red Hat OpenShift Architecture</li>
+    <li>Bare Metal OpenShift Deployments</li>
+    <li>Azure Red Hat OpenShift (ARO)</li>
+    <li>OpenShift Cluster Upgrades</li>
+    <li>Kubernetes Platform Engineering</li>
+    <li>Operator Lifecycle Management</li>
+    <li>Production Troubleshooting & RCA</li>
+    <li>Infrastructure Architecture</li>
+    <li>High Availability & Disaster Recovery</li>
+    <li>Networking, DNS & Load Balancing</li>
+    <li>Logging, Monitoring & Observability</li>
+</ul>
+
+<h2>Connect With Me</h2>
+
+<ul>
+    <li>
+        <a href="https://github.com/sonyprakash"
+           target="_blank"
+           rel="noopener noreferrer">
+           GitHub
+        </a>
+    </li>
+
+     target="_blank"
+           rel="noopener noreferrer">
+           LinkedIn
+        </a>
+    </li>
+</ul>
 
 <h2>Technical Articles</h2>
 
-<div style="border:1px solid #ddd;padding:20px;border-radius:8px;margin-bottom:20px;">
-    <h3>
-      <a href="insights-operator-dns-failure.html"
+<div class="card">
+
+<h3>
+<a href="insights-operator-dns-failure.html"
    target="_blank"
    rel="noopener noreferrer">
-    Troubleshooting OpenShift Insights Operator: DNS Resolution Failure
+Troubleshooting OpenShift Insights Operator: DNS Resolution Failure
 </a>
-    </h3>
+</h3>
 
-    <p>
-        Investigation of an OpenShift Insights Operator degraded condition
-        caused by DNS resolution failures on a single control plane node.
-    </p>
+<p>
+A real-world troubleshooting case where the OpenShift Insights Operator
+remained degraded due to DNS resolution failures on a single control plane
+node. The article walks through investigation, root cause analysis,
+resolution, verification, and operational learnings.
+</p>
+
+<p>
+<strong>Topics:</strong>
+OpenShift, Insights Operator, DNS, Kubernetes, Platform Engineering,
+Cluster Operations, Troubleshooting
+</p>
+
+</div>
+
+<h2>Upcoming Articles</h2>
+
+<ul>
+    <li>Azure Service Operator Image Pull Failures</li>
+    <li>OADP Upgrade Channel Migration</li>
+    <li>OpenShift Logging 5.x to 6.x Upgrade Experience</li>
+    <li>ARO MachineHealthCheck Deep Dive</li>
+    <li>Deprecated API Checks Before OpenShift Upgrades</li>
+    <li>Cluster Operator Degraded Investigation Techniques</li>
+    <li>Bare Metal OpenShift Architecture Best Practices</li>
+</ul>
+
+<div class="footer">
+
+<strong>Soni Prakash</strong><br>
+
+Technical Architect | OpenShift - Public cloud and Bare Metal | ARO | Kubernetes | Platform Engineering
+
+<br><br>
+
+Sharing practical architecture insights, troubleshooting experiences,
+upgrade learnings, and production support investigations from real-world
+OpenShift environments.
+
 </div>
 
 </body>
